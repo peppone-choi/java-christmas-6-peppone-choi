@@ -1,5 +1,5 @@
 package christmas.view;
 
 public interface OutputView {
-    void printMenu();
+    void printMenu(String orders);
 }

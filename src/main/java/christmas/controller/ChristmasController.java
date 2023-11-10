@@ -1,6 +1,7 @@
 package christmas.controller;
 
 import christmas.model.ExpectedVisitDate;
+import christmas.model.Orders;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 
@@ -14,15 +15,21 @@ public class ChristmasController {
     }
 
     public void run() {
-        date();
-    }
-
-    private void date() {
-        int date = inputView.readDate();
-        ExpectedVisitDate expectedVisitDate = readDate(date);
+        ExpectedVisitDate date = date();
+        Orders orders = readOrders(inputView.readOrder());
+        outputView.printMenu(orders.printOrders());
     }
 
     public ExpectedVisitDate readDate(int date) {
         return new ExpectedVisitDate(date);
+    }
+
+    private ExpectedVisitDate date() {
+        int date = inputView.readDate();
+        return readDate(date);
+    }
+
+    public Orders readOrders(String orders) {
+        return new Orders(orders);
     }
 }
