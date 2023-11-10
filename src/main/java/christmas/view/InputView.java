@@ -9,7 +9,7 @@ public class InputView {
         return dateReturn(readLine());
     }
 
-    private static int dateReturn(String input) {
+    private int dateReturn(String input) {
         dateValid(input);
         return Integer.parseInt(input);
     }
