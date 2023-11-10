@@ -16,4 +16,8 @@ public class Order {
     public String printOrder() {
         return MessageFormat.format(ORDER_PRINT_FORMAT.getString(), orderedMenu.getName(), orderedCount);
     }
+
+    public int calculateOrder() {
+        return orderedMenu.getCost() * orderedCount;
+    }
 }

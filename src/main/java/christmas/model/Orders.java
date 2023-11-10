@@ -26,6 +26,10 @@ public class Orders {
         return stringBuilder.toString();
     }
 
+    public int calculateAll() {
+        return orders.stream().mapToInt(Order::calculateOrder).sum();
+    }
+
     private List<Order> makeList(String orders) {
         ArrayList<Order> list;
         List<String> menuAndCount = Arrays.stream(orders.split(ORDERS_REGEX.getMessage())).toList();
