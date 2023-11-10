@@ -9,11 +9,10 @@ import static christmas.config.ValidMessage.ALL_DRINK_ERROR;
 import static christmas.config.ValidMessage.DATE_VALID_ERROR;
 import static christmas.config.ValidMessage.MENU_ORDER_OVER_20_ERROR;
 import static christmas.config.ValidMessage.ORDER_VALID_ERROR;
-import static christmas.model.MenuDivision.*;
+import static christmas.model.MenuDivision.DRINK;
 
 import christmas.exception.IllegalArgumentExceptionThrower;
 import christmas.model.Menu;
-import christmas.model.MenuDivision;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +26,7 @@ public class Validation {
 
     public static void validOrders(String order) {
         parseOrders(order);
+        validateDrinkOrder(order);
         List<String> orders = List.of(order.split(ORDERS_REGEX.getMessage()));
         orders.forEach(Validation::validOrder);
         validOrderCount(orders);
