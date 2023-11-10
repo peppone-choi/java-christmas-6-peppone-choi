@@ -1,13 +1,11 @@
 package christmas.model;
 
-import static christmas.config.CommonMessage.MENU_NOT_FOUND_ERROR;
+import static christmas.config.CommonConfig.MENU_NOT_FOUND_ERROR;
 import static christmas.exception.IllegalArgumentExceptionThrower.*;
 import static christmas.model.MenuDivision.APPETIZER;
 import static christmas.model.MenuDivision.DESSERT;
 import static christmas.model.MenuDivision.DRINK;
 import static christmas.model.MenuDivision.MAIN;
-
-import christmas.exception.IllegalArgumentExceptionThrower;
 
 public enum Menu {
     MUSHROOM_SOUP("양송이수프", 6000, APPETIZER),
@@ -51,7 +49,7 @@ public enum Menu {
                 return menu;
             }
         }
-        throwException(MENU_NOT_FOUND_ERROR.getMessage());
+        throwException(MENU_NOT_FOUND_ERROR.getString());
         return null;
     }
 

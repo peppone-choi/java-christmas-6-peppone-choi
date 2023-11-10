@@ -1,8 +1,7 @@
 package christmas.model;
 
-import static christmas.config.CommonMessage.ORDERS_REGEX;
-import static christmas.config.CommonMessage.ORDER_MENU_COUNT_REGEX;
-import static java.util.stream.Collectors.toList;
+import static christmas.config.CommonConfig.ORDERS_REGEX;
+import static christmas.config.CommonConfig.ORDER_MENU_COUNT_REGEX;
 
 import christmas.util.Validation;
 import java.util.ArrayList;
@@ -32,10 +31,10 @@ public class Orders {
 
     private List<Order> makeList(String orders) {
         ArrayList<Order> list;
-        List<String> menuAndCount = Arrays.stream(orders.split(ORDERS_REGEX.getMessage())).toList();
+        List<String> menuAndCount = Arrays.stream(orders.split(ORDERS_REGEX.getString())).toList();
         return menuAndCount.stream()
-                .map(m -> new Order(Arrays.stream(m.split(ORDER_MENU_COUNT_REGEX.getMessage())).toList().get(0),
-                        Integer.parseInt(Arrays.stream(m.split(ORDER_MENU_COUNT_REGEX.getMessage())).toList().get(1))))
+                .map(m -> new Order(Arrays.stream(m.split(ORDER_MENU_COUNT_REGEX.getString())).toList().get(0),
+                        Integer.parseInt(Arrays.stream(m.split(ORDER_MENU_COUNT_REGEX.getString())).toList().get(1))))
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 }

@@ -1,7 +1,7 @@
 package christmas.util;
 
-import static christmas.config.CommonMessage.ORDERS_REGEX;
-import static christmas.config.CommonMessage.ORDER_MENU_COUNT_REGEX;
+import static christmas.config.CommonConfig.ORDERS_REGEX;
+import static christmas.config.CommonConfig.ORDER_MENU_COUNT_REGEX;
 import static christmas.config.ValidConfig.DATE_MAX;
 import static christmas.config.ValidConfig.DATE_MIN;
 import static christmas.config.ValidConfig.ORDER_COUNT_MAX;
@@ -28,7 +28,7 @@ public class Validation {
     public static void validOrders(String order) {
         parseOrders(order);
         validateDrinkOrder(order);
-        List<String> orders = List.of(order.split(ORDERS_REGEX.getMessage()));
+        List<String> orders = List.of(order.split(ORDERS_REGEX.getString()));
         orders.forEach(Validation::validOrder);
         validOrderCount(orders);
         validateUniqueOrders(orders);
@@ -74,7 +74,7 @@ public class Validation {
     }
 
     private static void validOrder(String o) {
-        if (!Menu.contains(Arrays.stream(o.split(ORDER_MENU_COUNT_REGEX.getMessage())).toList().get(0))) {
+        if (!Menu.contains(Arrays.stream(o.split(ORDER_MENU_COUNT_REGEX.getString())).toList().get(0))) {
             throwException(ORDER_VALID_ERROR.getMessage());
         }
     }
@@ -98,9 +98,9 @@ public class Validation {
 
     private static void validateUniqueOrders(List<String> orders) {
         Map<String, List<String>> menuCountMap = orders.stream()
-                .map(order -> order.split(ORDERS_REGEX.getMessage()))
+                .map(order -> order.split(ORDERS_REGEX.getString()))
                 .flatMap(Arrays::stream)
-                .map(menuAndCount -> menuAndCount.split(ORDER_MENU_COUNT_REGEX.getMessage()))
+                .map(menuAndCount -> menuAndCount.split(ORDER_MENU_COUNT_REGEX.getString()))
                 .filter(parts -> parts.length == 2)
                 .collect(Collectors.groupingBy(
                         parts -> parts[0],
