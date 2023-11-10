@@ -18,19 +18,8 @@ public class ChristmasController {
 
     public void run() {
         ExpectedVisitDate date = date();
-        Orders orders = orderValidation();
-
-        printBeforeEventPrice(orders);
-    }
-
-    private Orders orderValidation() {
         Orders orders = getOrders();
-        try {
-            Validation.validBeforePrice(orders.calculateAll());
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
-        return orders;
+        printBeforeEventPrice(orders);
     }
 
     private void printBeforeEventPrice(Orders orders) {
