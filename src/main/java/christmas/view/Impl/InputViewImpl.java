@@ -9,8 +9,14 @@ import christmas.view.InputView;
 public class InputViewImpl implements InputView {
     @Override
     public int readDate() {
-        System.out.println(PLEASE_INPUT_DATE.getMessage());
-        return dateReturn(readLine());
+        while (true) {
+            try {
+                System.out.println(PLEASE_INPUT_DATE.getMessage());
+                return dateReturn(readLine());
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
     private int dateReturn(String input) {

@@ -1,9 +1,9 @@
 package christmas.model;
 
-public class expectedVisitDate {
+public class ExpectedVisitDate {
     private int date;
 
-    public expectedVisitDate(int date) {
+    public ExpectedVisitDate(int date) {
         this.date = date;
     }
 }
