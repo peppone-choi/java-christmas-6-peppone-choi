@@ -16,12 +16,6 @@ class OrdersTest {
         // When
         Orders orders = new Orders(inputString);
 
-        // Then
-        List<Order> expectedOrderList = List.of(
-                new Order("티본스테이크", 1),
-                new Order("바비큐립", 1)
-        );
-
         assertThat(orders.toDtoList()).isEqualTo(
                 List.of(new OrderDto(Menu.T_BONE_STEAK, 1),
                         new OrderDto(Menu.BBQ_RIB, 1)));
