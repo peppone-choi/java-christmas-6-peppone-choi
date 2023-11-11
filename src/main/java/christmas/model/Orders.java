@@ -19,11 +19,7 @@ public class Orders {
     }
 
     public String printOrders() {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (Order order : orders) {
-            stringBuilder.append(order.printOrder()).append("\n");
-        }
-        return stringBuilder.toString();
+        return orders.stream().map(order -> "%s\n".formatted(order.printOrder())).collect(Collectors.joining());
     }
 
     public List<OrderDto> toDtoList() {
@@ -35,7 +31,6 @@ public class Orders {
     }
 
     private List<Order> makeList(String orders) {
-        ArrayList<Order> list;
         List<String> menuAndCount = Arrays.stream(orders.split(ORDERS_REGEX.getString())).toList();
         return menuAndCount.stream()
                 .map(m -> new Order(Arrays.stream(m.split(ORDER_MENU_COUNT_REGEX.getString())).toList().get(0),
