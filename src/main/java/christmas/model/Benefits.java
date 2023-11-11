@@ -80,7 +80,7 @@ public class Benefits {
     private int calculateChristmasDDayDiscount(int expectedVisitDate) {
         int beforeChistmas = expectedVisitDate - DATE_CHRISTMAS.getNumber();
         if (beforeChistmas < 0) {
-            return 1000 + (Math.abs(beforeChistmas) * 100);
+            return 1000 + ((DATE_CHRISTMAS.getNumber() - Math.abs(beforeChistmas) - 1) * 100);
         }
         return 0;
     }
@@ -99,8 +99,7 @@ public class Benefits {
         return orderDtoList
                 .stream()
                 .filter(orderDto -> orderDto.orderedMenu().getMenuDivision().equals(menuDivision))
-                .mapToInt(OrderDto::calculateTotalCost)
-                .map(cost -> cost / 2023 * 2023)
+                .mapToInt(orderDto -> orderDto.orderedCount() * 2023)
                 .sum();
     }
 }
