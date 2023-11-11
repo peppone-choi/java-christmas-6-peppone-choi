@@ -1,9 +1,12 @@
 package christmas.controller;
 
+import static christmas.config.CommonConfigNumber.GIFT_GIVEN_COUNT;
+
 import christmas.model.BeforeEventPrice;
 import christmas.model.ExpectedVisitDate;
+import christmas.model.Gift;
+import christmas.model.Menu;
 import christmas.model.Orders;
-import christmas.util.Validation;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 
@@ -19,11 +22,25 @@ public class ChristmasController {
     public void run() {
         ExpectedVisitDate date = date();
         Orders orders = getOrders();
-        printBeforeEventPrice(orders);
+        BeforeEventPrice beforeEventPrice = new BeforeEventPrice(orders);
+        printBeforeEventPrice(beforeEventPrice);
+        Gift gift = new Gift(beforeEventPrice.getPrice(), Menu.CHAMPAGNE.getName(), GIFT_GIVEN_COUNT.getNumber());
+        printGift(gift);
     }
 
-    private void printBeforeEventPrice(Orders orders) {
-        BeforeEventPrice beforeEventPrice = new BeforeEventPrice(orders);
+    public Orders readOrders(String orders) {
+        return new Orders(orders);
+    }
+
+    public ExpectedVisitDate readDate(int date) {
+        return new ExpectedVisitDate(date);
+    }
+
+    private void printGift(Gift gift) {
+        outputView.printGift(gift.printGift());
+    }
+
+    private void printBeforeEventPrice(BeforeEventPrice beforeEventPrice) {
         outputView.printBeforePrice(beforeEventPrice.printBeforePrice());
     }
 
@@ -33,16 +50,10 @@ public class ChristmasController {
         return orders;
     }
 
-    public ExpectedVisitDate readDate(int date) {
-        return new ExpectedVisitDate(date);
-    }
-
     private ExpectedVisitDate date() {
         int date = inputView.readDate();
         return readDate(date);
     }
 
-    public Orders readOrders(String orders) {
-        return new Orders(orders);
-    }
+
 }

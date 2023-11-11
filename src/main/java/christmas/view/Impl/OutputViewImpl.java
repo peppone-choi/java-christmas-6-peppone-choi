@@ -20,6 +20,12 @@ public class OutputViewImpl implements OutputView {
     @Override
     public void printBeforePrice(int price) {
         System.out.println("<할인 전 총주문 금액>");
-        System.out.println(MessageFormat.format(KOREAN_WON_FORMAT.getString(), df.format(price)));
+        System.out.printf("%s\n%n", MessageFormat.format(KOREAN_WON_FORMAT.getString(), df.format(price)));
+    }
+
+    @Override
+    public void printGift(String gift) {
+        System.out.println("<증정 메뉴>");
+        System.out.printf("%s\n%n", gift);
     }
 }

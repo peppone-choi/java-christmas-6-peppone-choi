@@ -6,6 +6,11 @@ public class BeforeEventPrice {
     public BeforeEventPrice(Orders orders) {
         this.price = orders.calculateAll();
     }
+
+    public int getPrice() {
+        return price;
+    }
+
     public int printBeforePrice() {
         return price;
     }
