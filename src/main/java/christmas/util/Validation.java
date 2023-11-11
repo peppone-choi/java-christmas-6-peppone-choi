@@ -16,6 +16,7 @@ import christmas.model.Menu;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Validation {
@@ -39,7 +40,7 @@ public class Validation {
                 .mapToInt(parts -> {
                     String menuName = parts[0];
                     int quantity = Integer.parseInt(parts[1]);
-                    int menuPrice = Menu.getMenuFromName(menuName).getCost();
+                    int menuPrice = Objects.requireNonNull(Menu.getMenuFromName(menuName)).getCost();
                     return quantity * menuPrice;
                 })
                 .sum();
@@ -126,7 +127,7 @@ public class Validation {
                 .map(String::trim)
                 .filter(order -> order.matches("[a-zA-Z가-힣]+-\\d+"))
                 .map(order -> order.split("-")[0])
-                .map(Menu::getMenuFromName)
+                .map(Menu::getMenuFromName).filter(Objects::nonNull)
                 .filter(menu -> menu.getMenuDivision() == DRINK)
                 .count());
 
