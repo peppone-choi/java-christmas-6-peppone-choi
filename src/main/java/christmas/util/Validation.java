@@ -9,7 +9,6 @@ import static christmas.config.ValidMessage.ALL_DRINK_ERROR;
 import static christmas.config.ValidMessage.DATE_VALID_ERROR;
 import static christmas.config.ValidMessage.MENU_ORDER_OVER_20_ERROR;
 import static christmas.config.ValidMessage.ORDER_VALID_ERROR;
-import static christmas.config.ValidMessage.UNDER_10000_ERROR;
 import static christmas.model.MenuDivision.DRINK;
 
 import christmas.exception.IllegalArgumentExceptionThrower;
@@ -32,14 +31,6 @@ public class Validation {
         orders.forEach(Validation::validOrder);
         validOrderCount(orders);
         validateUniqueOrders(orders);
-        validBeforePrice(orders);
-    }
-
-    public static void validBeforePrice(List<String> order) {
-        int totalPrice = getTotalPrice(order);
-        if (totalPrice < 10000) {
-            throwException(UNDER_10000_ERROR.getMessage());
-        }
     }
 
     private static int getTotalPrice(List<String> order) {
