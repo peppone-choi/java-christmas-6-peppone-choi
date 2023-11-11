@@ -34,6 +34,14 @@ public class ChristmasController {
         printBadge(benefitSum);
     }
 
+    public Orders readOrders(String orders) {
+        return new Orders(orders);
+    }
+
+    public ExpectedVisitDate readDate(int date) {
+        return new ExpectedVisitDate(date);
+    }
+
     private BeforeEventPrice getBeforeEventPrice(Orders orders) {
         BeforeEventPrice beforeEventPrice = new BeforeEventPrice(orders);
         printBeforeEventPrice(beforeEventPrice);
@@ -65,14 +73,6 @@ public class ChristmasController {
     private void printBadge(BenefitSum benefitSum) {
         Badge badge = getBadge(benefitSum.getBenefitSum());
         printBadge(badge);
-    }
-
-    public Orders readOrders(String orders) {
-        return new Orders(orders);
-    }
-
-    public ExpectedVisitDate readDate(int date) {
-        return new ExpectedVisitDate(date);
     }
 
     private void printGift(Gift gift) {
