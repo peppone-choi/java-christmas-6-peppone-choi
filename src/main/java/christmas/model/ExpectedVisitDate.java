@@ -6,7 +6,7 @@ public class ExpectedVisitDate {
     private final int date;
 
     public ExpectedVisitDate(int date) {
-        Validation.validOrders(String.valueOf(date));
+        Validation.validDate(String.valueOf(date));
         this.date = date;
     }
 
