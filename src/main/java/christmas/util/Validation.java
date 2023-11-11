@@ -34,18 +34,6 @@ public class Validation {
         validateUniqueOrders(orders);
     }
 
-    private static int getTotalPrice(List<String> order) {
-        return order.stream()
-                .map(orders -> orders.split("-"))
-                .mapToInt(parts -> {
-                    String menuName = parts[0];
-                    int quantity = Integer.parseInt(parts[1]);
-                    int menuPrice = Objects.requireNonNull(Menu.getMenuFromName(menuName)).getCost();
-                    return quantity * menuPrice;
-                })
-                .sum();
-    }
-
     private static void dateIntegerValid(String date) {
         try {
             Integer.parseInt(date);
