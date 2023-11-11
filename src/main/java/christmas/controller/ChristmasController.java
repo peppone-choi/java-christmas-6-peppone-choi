@@ -49,7 +49,7 @@ public class ChristmasController {
     }
 
     private void printGift(BeforeEventPrice beforeEventPrice) {
-        Gift gift = new Gift(beforeEventPrice.getPrice(), Menu.CHAMPAGNE.getName(), GIFT_GIVEN_COUNT.getNumber());
+        Gift gift = new Gift(beforeEventPrice.getBeforePrice(), Menu.CHAMPAGNE.getName(), GIFT_GIVEN_COUNT.getNumber());
         printGift(gift);
     }
 
@@ -80,7 +80,7 @@ public class ChristmasController {
     }
 
     private void printBeforeEventPrice(BeforeEventPrice beforeEventPrice) {
-        outputView.printBeforePrice(beforeEventPrice.printBeforePrice());
+        outputView.printBeforePrice(beforeEventPrice.getBeforePrice());
     }
 
     private void printBenefitSum(BenefitSum benefitSum) {

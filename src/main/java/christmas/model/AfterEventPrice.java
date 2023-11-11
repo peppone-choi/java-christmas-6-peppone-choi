@@ -4,7 +4,7 @@ public class AfterEventPrice {
     private final int afterEventPrice;
 
     public AfterEventPrice(BeforeEventPrice beforeEventPrice, Benefits benefits) {
-        this.afterEventPrice = beforeEventPrice.getPrice() - benefits.sumDiscount();
+        this.afterEventPrice = beforeEventPrice.getBeforePrice() - benefits.sumDiscount();
     }
 
     public int getAfterEventPrice() {
