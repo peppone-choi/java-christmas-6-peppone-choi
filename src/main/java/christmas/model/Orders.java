@@ -3,6 +3,7 @@ package christmas.model;
 import static christmas.config.CommonConfig.ORDERS_REGEX;
 import static christmas.config.CommonConfig.ORDER_MENU_COUNT_REGEX;
 
+import christmas.dto.OrderDto;
 import christmas.util.Validation;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,6 +24,10 @@ public class Orders {
             stringBuilder.append(order.printOrder()).append("\n");
         }
         return stringBuilder.toString();
+    }
+
+    public List<OrderDto> toDtoList() {
+        return orders.stream().map(Order::toDto).collect(Collectors.toList());
     }
 
     public int calculateAll() {

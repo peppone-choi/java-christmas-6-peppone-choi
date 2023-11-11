@@ -2,6 +2,7 @@ package christmas.model;
 
 import static christmas.config.OrderConfig.ORDER_PRINT_FORMAT;
 
+import christmas.dto.OrderDto;
 import java.text.MessageFormat;
 
 public class Order {
@@ -11,6 +12,10 @@ public class Order {
     public Order(String menu, Integer count) {
         this.orderedMenu = Menu.getMenuFromName(menu);
         this.orderedCount = count;
+    }
+
+    public OrderDto toDto() {
+        return new OrderDto(orderedMenu, orderedCount);
     }
 
     public String printOrder() {

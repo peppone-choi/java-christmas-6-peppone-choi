@@ -6,4 +6,8 @@ public class ExpectedVisitDate {
     public ExpectedVisitDate(int date) {
         this.date = date;
     }
+
+    public int getDate() {
+        return date;
+    }
 }

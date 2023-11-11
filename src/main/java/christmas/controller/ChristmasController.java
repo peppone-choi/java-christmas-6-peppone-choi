@@ -3,6 +3,7 @@ package christmas.controller;
 import static christmas.config.CommonConfigNumber.GIFT_GIVEN_COUNT;
 
 import christmas.model.BeforeEventPrice;
+import christmas.model.Benefits;
 import christmas.model.ExpectedVisitDate;
 import christmas.model.Gift;
 import christmas.model.Menu;
@@ -26,6 +27,12 @@ public class ChristmasController {
         printBeforeEventPrice(beforeEventPrice);
         Gift gift = new Gift(beforeEventPrice.getPrice(), Menu.CHAMPAGNE.getName(), GIFT_GIVEN_COUNT.getNumber());
         printGift(gift);
+        Benefits benefits = new Benefits(orders.toDtoList(), date);
+        printBenefits(benefits);
+    }
+
+    private void printBenefits(Benefits benefits) {
+        outputView.printBenefits(benefits.printBenefits());
     }
 
     public Orders readOrders(String orders) {

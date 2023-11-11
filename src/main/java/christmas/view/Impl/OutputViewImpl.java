@@ -28,4 +28,10 @@ public class OutputViewImpl implements OutputView {
         System.out.println("<증정 메뉴>");
         System.out.printf("%s\n%n", gift);
     }
+
+    @Override
+    public void printBenefits(String benefits) {
+        System.out.println("<혜택 내역>");
+        System.out.println(benefits);
+    }
 }
