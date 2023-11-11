@@ -33,6 +33,10 @@ public class Benefits {
         return stringBuilder.toString();
     }
 
+    public int sumBenefits() {
+        return benefits.stream().mapToInt(Benefit::getBenefitAmount).sum();
+    }
+
     private List<Benefit> makeBenefitList(List<OrderDto> orderDtoList, ExpectedVisitDate expectedVisitDate) {
         List<Benefit> benefits = new ArrayList<>();
 

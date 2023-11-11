@@ -5,4 +5,5 @@ public interface OutputView {
     void printBeforePrice(int price);
     void printGift(String gift);
     void printBenefits(String benefits);
+    void printBenefitSum(int benefitSum);
 }

@@ -3,6 +3,7 @@ package christmas.controller;
 import static christmas.config.CommonConfigNumber.GIFT_GIVEN_COUNT;
 
 import christmas.model.BeforeEventPrice;
+import christmas.model.BenefitSum;
 import christmas.model.Benefits;
 import christmas.model.ExpectedVisitDate;
 import christmas.model.Gift;
@@ -29,6 +30,8 @@ public class ChristmasController {
         printGift(gift);
         Benefits benefits = new Benefits(orders.toDtoList(), date);
         printBenefits(benefits);
+        BenefitSum benefitSum = new BenefitSum(benefits);
+        printBenefitSum(benefitSum);
     }
 
     private void printBenefits(Benefits benefits) {
@@ -49,6 +52,10 @@ public class ChristmasController {
 
     private void printBeforeEventPrice(BeforeEventPrice beforeEventPrice) {
         outputView.printBeforePrice(beforeEventPrice.printBeforePrice());
+    }
+
+    private void printBenefitSum(BenefitSum benefitSum) {
+        outputView.printBenefitSum(benefitSum.printBenefitSum());
     }
 
     private Orders getOrders() {

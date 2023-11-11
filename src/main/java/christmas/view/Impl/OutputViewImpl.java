@@ -34,4 +34,10 @@ public class OutputViewImpl implements OutputView {
         System.out.println("<혜택 내역>");
         System.out.println(benefits);
     }
+
+    @Override
+    public void printBenefitSum(int benefitSum) {
+        System.out.println("<총혜택 금액>");
+        System.out.printf("-%s\n%n", MessageFormat.format(KOREAN_WON_FORMAT.getString(), df.format(benefitSum)));
+    }
 }
