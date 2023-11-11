@@ -7,7 +7,7 @@ public class BenefitSum {
         this.benefitSum = benefits.sumBenefits();
     }
 
-    public int printBenefitSum() {
+    public int getBenefitSum() {
         return benefitSum;
     }
 }

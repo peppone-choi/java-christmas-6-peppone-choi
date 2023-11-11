@@ -40,4 +40,16 @@ public class OutputViewImpl implements OutputView {
         System.out.println("<총혜택 금액>");
         System.out.printf("-%s\n%n", MessageFormat.format(KOREAN_WON_FORMAT.getString(), df.format(benefitSum)));
     }
+
+    @Override
+    public void printAfterEventPrice(int afterEventPrice) {
+        System.out.println("<할인 후 예상 결제 금액>");
+        System.out.printf("%s\n%n", MessageFormat.format(KOREAN_WON_FORMAT.getString(), df.format(afterEventPrice)));
+    }
+
+    @Override
+    public void printBadge(String badgeName) {
+        System.out.println("<12월 이벤트 배지>");
+        System.out.println(badgeName);
+    }
 }

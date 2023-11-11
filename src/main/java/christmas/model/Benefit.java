@@ -11,6 +11,10 @@ public class Benefit {
         this.benefitAmount = benefitAmount;
     }
 
+    public DiscountAndGift getDiscountAndGift() {
+        return discountAndGift;
+    }
+
     public int getBenefitAmount() {
         return benefitAmount;
     }

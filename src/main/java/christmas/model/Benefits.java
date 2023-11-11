@@ -7,8 +7,13 @@ import static christmas.model.DiscountAndGift.GIFT_EVENT;
 import static christmas.model.DiscountAndGift.SPECIAL_DISCOUNT;
 import static christmas.model.DiscountAndGift.WEEKDAY_DISCOUNT;
 import static christmas.model.DiscountAndGift.WEEKEND_DISCOUNT;
-import static java.time.DayOfWeek.*;
+import static java.time.DayOfWeek.FRIDAY;
+import static java.time.DayOfWeek.MONDAY;
 import static java.time.DayOfWeek.SATURDAY;
+import static java.time.DayOfWeek.SUNDAY;
+import static java.time.DayOfWeek.THURSDAY;
+import static java.time.DayOfWeek.TUESDAY;
+import static java.time.DayOfWeek.WEDNESDAY;
 
 import christmas.dto.OrderDto;
 import java.time.DayOfWeek;
@@ -23,6 +28,15 @@ public class Benefits {
         this.benefits = makeBenefitList(orderDtoList, expectedVisitDate);
     }
 
+    private static void addList(List<Benefit> benefits, int weekdayDiscount, int weekendDiscount, int specialDiscount,
+                                int christmasDDayDiscount, int giftEvent) {
+        benefits.add(new Benefit(WEEKDAY_DISCOUNT, weekdayDiscount));
+        benefits.add(new Benefit(WEEKEND_DISCOUNT, weekendDiscount));
+        benefits.add(new Benefit(SPECIAL_DISCOUNT, specialDiscount));
+        benefits.add(new Benefit(CHRISTMAS_D_DAY_DISCOUNT, christmasDDayDiscount));
+        benefits.add(new Benefit(GIFT_EVENT, giftEvent));
+    }
+
     public String printBenefits() {
         int sum = benefits.stream().mapToInt(Benefit::getBenefitAmount).sum();
         if (sum <= 0) {
@@ -34,7 +48,16 @@ public class Benefits {
     }
 
     public int sumBenefits() {
-        return benefits.stream().mapToInt(Benefit::getBenefitAmount).sum();
+        return benefits.stream()
+                .mapToInt(Benefit::getBenefitAmount)
+                .sum();
+    }
+
+    public int sumDiscount() {
+        return benefits.stream()
+                .filter(benefit -> !benefit.getDiscountAndGift().equals(GIFT_EVENT))
+                .mapToInt(Benefit::getBenefitAmount)
+                .sum();
     }
 
     private List<Benefit> makeBenefitList(List<OrderDto> orderDtoList, ExpectedVisitDate expectedVisitDate) {
@@ -49,15 +72,6 @@ public class Benefits {
         addList(benefits, weekdayDiscount, weekendDiscount, specialDiscount, christmasDDayDiscount, giftEvent);
 
         return benefits;
-    }
-
-    private static void addList(List<Benefit> benefits, int weekdayDiscount, int weekendDiscount, int specialDiscount,
-                                  int christmasDDayDiscount, int giftEvent) {
-        benefits.add(new Benefit(WEEKDAY_DISCOUNT, weekdayDiscount));
-        benefits.add(new Benefit(WEEKEND_DISCOUNT, weekendDiscount));
-        benefits.add(new Benefit(SPECIAL_DISCOUNT, specialDiscount));
-        benefits.add(new Benefit(CHRISTMAS_D_DAY_DISCOUNT, christmasDDayDiscount));
-        benefits.add(new Benefit(GIFT_EVENT, giftEvent));
     }
 
     private int calculateWeekdayDiscount(List<OrderDto> orderDtoList, int expectedVisitDate) {
