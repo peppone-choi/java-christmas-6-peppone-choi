@@ -1,6 +1,5 @@
 package christmas.model;
 
-import static christmas.config.CommonConfig.BENEFITS_NOTHING;
 import static christmas.config.CommonConfigList.SPECIAL_DAY;
 import static christmas.config.CommonConfigList.WEEKDAY;
 import static christmas.config.CommonConfigList.WEEKEND;
@@ -40,7 +39,6 @@ public class Benefits {
         benefits.add(new Benefit(CHRISTMAS_D_DAY_DISCOUNT, christmasDDayDiscount));
         benefits.add(new Benefit(GIFT_EVENT, giftEvent));
     }
-
 
 
     private List<Benefit> makeBenefitList(List<OrderDto> orderDtoList, ExpectedVisitDate expectedVisitDate) {
