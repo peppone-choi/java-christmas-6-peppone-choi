@@ -4,6 +4,7 @@ import static christmas.config.CommonConfig.AFTER_EVENT_PRICE;
 import static christmas.config.CommonConfig.BEFORE_EVENT_PRICE;
 import static christmas.config.CommonConfig.BENEFIT_LIST;
 import static christmas.config.CommonConfig.BENEFIT_SUM;
+import static christmas.config.CommonConfig.DECIMAL_FORMAT_PATTON;
 import static christmas.config.CommonConfig.EVENT_BADGE;
 import static christmas.config.CommonConfig.GIFT_MENU;
 import static christmas.config.CommonConfig.KOREAN_WON_FORMAT;
@@ -17,7 +18,7 @@ import java.text.MessageFormat;
 
 public class OutputViewImpl implements OutputView {
 
-    DecimalFormat df = new DecimalFormat("###,###");
+    DecimalFormat df = new DecimalFormat(DECIMAL_FORMAT_PATTON.getString());
 
     @Override
     public void printDate(int date) {

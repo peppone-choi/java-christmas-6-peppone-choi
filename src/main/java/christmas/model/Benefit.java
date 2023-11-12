@@ -2,6 +2,7 @@ package christmas.model;
 
 import static christmas.config.CommonConfig.DISCOUNT_FORMAT;
 import static christmas.config.CommonConfig.NONE;
+import static christmas.config.CommonConfigNumber.ZERO;
 
 import java.text.MessageFormat;
 
@@ -23,7 +24,7 @@ public class Benefit {
     }
 
     public String printBenefit() {
-        if (benefitAmount <= 0) {
+        if (benefitAmount <= ZERO.getNumber()) {
             return NONE.getString();
         }
         return MessageFormat.format(DISCOUNT_FORMAT.getString(), discountAndGift.getName(), benefitAmount);
