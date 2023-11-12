@@ -1,5 +1,8 @@
 package christmas.model;
 
+import static christmas.config.CommonConfig.DISCOUNT_FORMAT;
+import static christmas.config.CommonConfig.NONE;
+
 import java.text.MessageFormat;
 
 public class Benefit {
@@ -21,8 +24,8 @@ public class Benefit {
 
     public String printBenefit() {
         if (benefitAmount <= 0) {
-            return "";
+            return NONE.getString();
         }
-        return MessageFormat.format("{0}: -{1}원 \n", discountAndGift.getName(), benefitAmount);
+        return MessageFormat.format(DISCOUNT_FORMAT.getString(), discountAndGift.getName(), benefitAmount);
     }
 }

@@ -1,19 +1,23 @@
 package christmas.model;
 
+import static christmas.config.CommonConfig.BENEFITS_NOTHING;
+import static christmas.config.CommonConfigList.SPECIAL_DAY;
+import static christmas.config.CommonConfigList.WEEKDAY;
+import static christmas.config.CommonConfigList.WEEKEND;
+import static christmas.config.CommonConfigNumber.CHRIST_MAS_D_DAY_EVENT_COST;
+import static christmas.config.CommonConfigNumber.CHRIST_MAS_D_DAY_START_COST;
 import static christmas.config.CommonConfigNumber.DATE_CHRISTMAS;
+import static christmas.config.CommonConfigNumber.EVENT_DISCOUNT_COST;
 import static christmas.config.CommonConfigNumber.GIFT_GIVEN_MONEY;
+import static christmas.config.CommonConfigNumber.SPECIAL_DISCOUNT_COST;
+import static christmas.config.CommonConfigNumber.THIS_MONTH;
+import static christmas.config.CommonConfigNumber.THIS_YEAR;
+import static christmas.config.CommonConfigNumber.ZERO;
 import static christmas.model.DiscountAndGift.CHRISTMAS_D_DAY_DISCOUNT;
 import static christmas.model.DiscountAndGift.GIFT_EVENT;
 import static christmas.model.DiscountAndGift.SPECIAL_DISCOUNT;
 import static christmas.model.DiscountAndGift.WEEKDAY_DISCOUNT;
 import static christmas.model.DiscountAndGift.WEEKEND_DISCOUNT;
-import static java.time.DayOfWeek.FRIDAY;
-import static java.time.DayOfWeek.MONDAY;
-import static java.time.DayOfWeek.SATURDAY;
-import static java.time.DayOfWeek.SUNDAY;
-import static java.time.DayOfWeek.THURSDAY;
-import static java.time.DayOfWeek.TUESDAY;
-import static java.time.DayOfWeek.WEDNESDAY;
 
 import christmas.dto.OrderDto;
 import java.time.DayOfWeek;
@@ -39,8 +43,8 @@ public class Benefits {
 
     public String printBenefits() {
         int sum = benefits.stream().mapToInt(Benefit::getBenefitAmount).sum();
-        if (sum <= 0) {
-            return "없음\n";
+        if (sum <= ZERO.getNumber()) {
+            return BENEFITS_NOTHING.getString();
         }
         StringBuilder stringBuilder = new StringBuilder();
         benefits.forEach(benefit -> stringBuilder.append(benefit.printBenefit()));
@@ -75,41 +79,46 @@ public class Benefits {
     }
 
     private int calculateWeekdayDiscount(List<OrderDto> orderDtoList, int expectedVisitDate) {
-        if (List.of(MONDAY, TUESDAY, WEDNESDAY, THURSDAY, SUNDAY).contains(getDayOfWeek(expectedVisitDate))) {
+        if (WEEKDAY.getList().contains(getDayOfWeek(expectedVisitDate))) {
             return calculateDiscountForMenuDivision(orderDtoList, MenuDivision.DESSERT);
         }
-        return 0;
+        return ZERO.getNumber();
     }
 
     private int calculateWeekendDiscount(List<OrderDto> orderDtoList, int expectedVisitDate) {
-        if (List.of(FRIDAY, SATURDAY).contains(getDayOfWeek(expectedVisitDate))) {
+        if (WEEKEND.getList().contains(getDayOfWeek(expectedVisitDate))) {
             return calculateDiscountForMenuDivision(orderDtoList, MenuDivision.MAIN);
         }
-        return 0;
+        return ZERO.getNumber();
     }
 
     private int calculateSpecialDiscount(int expectedVisitDate) {
-        if (List.of(3, 10, 17, 24, 25, 31).contains(expectedVisitDate)) {
-            return 1000;
+        if (SPECIAL_DAY.getList().contains(expectedVisitDate)) {
+            return SPECIAL_DISCOUNT_COST.getNumber();
         }
-        return 0;
+        return ZERO.getNumber();
     }
 
     private int calculateChristmasDDayDiscount(int expectedVisitDate) {
         int beforeChistmas = expectedVisitDate - DATE_CHRISTMAS.getNumber();
         if (beforeChistmas < 0) {
-            return 1000 + ((DATE_CHRISTMAS.getNumber() - Math.abs(beforeChistmas) - 1) * 100);
+            return CHRIST_MAS_D_DAY_START_COST.getNumber() + (
+                    (DATE_CHRISTMAS.getNumber() - Math.abs(beforeChistmas) - 1)
+                            * CHRIST_MAS_D_DAY_EVENT_COST.getNumber());
         }
-        return 0;
+        return ZERO.getNumber();
     }
 
     private int calculateGiftEvent(List<OrderDto> orderDtoList) {
         int orderSum = orderDtoList.stream().mapToInt(OrderDto::calculateTotalCost).sum();
-        return (orderSum >= GIFT_GIVEN_MONEY.getNumber()) ? Menu.CHAMPAGNE.getCost() : 0;
+        if (orderSum >= GIFT_GIVEN_MONEY.getNumber()) {
+            return Menu.CHAMPAGNE.getCost();
+        }
+        return ZERO.getNumber();
     }
 
     private DayOfWeek getDayOfWeek(int expectedVisitDate) {
-        LocalDate date = LocalDate.of(2023, 12, expectedVisitDate);
+        LocalDate date = LocalDate.of(THIS_YEAR.getNumber(), THIS_MONTH.getNumber(), expectedVisitDate);
         return date.getDayOfWeek();
     }
 
@@ -117,7 +126,7 @@ public class Benefits {
         return orderDtoList
                 .stream()
                 .filter(orderDto -> orderDto.orderedMenu().getMenuDivision().equals(menuDivision))
-                .mapToInt(orderDto -> orderDto.orderedCount() * 2023)
+                .mapToInt(orderDto -> orderDto.orderedCount() * EVENT_DISCOUNT_COST.getNumber())
                 .sum();
     }
 }

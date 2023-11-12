@@ -2,6 +2,7 @@ package christmas.model;
 
 import static christmas.config.CommonConfig.ORDERS_REGEX;
 import static christmas.config.CommonConfig.ORDER_MENU_COUNT_REGEX;
+import static christmas.config.CommonConfig.PRINT_ORDER_FORMAT;
 
 import christmas.dto.OrderDto;
 import christmas.util.Validation;
@@ -19,7 +20,8 @@ public class Orders {
     }
 
     public String printOrders() {
-        return orders.stream().map(order -> "%s\n".formatted(order.printOrder())).collect(Collectors.joining());
+        return orders.stream().map(order -> PRINT_ORDER_FORMAT.getString().formatted(order.printOrder()))
+                .collect(Collectors.joining());
     }
 
     public List<OrderDto> toDtoList() {

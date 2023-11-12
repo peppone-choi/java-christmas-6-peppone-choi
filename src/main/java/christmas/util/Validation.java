@@ -2,6 +2,7 @@ package christmas.util;
 
 import static christmas.config.CommonConfig.ORDERS_REGEX;
 import static christmas.config.CommonConfig.ORDER_MENU_COUNT_REGEX;
+import static christmas.config.CommonConfig.ORDER_MENU_VALID_MATCHING_REGEX;
 import static christmas.config.ValidConfig.DATE_MAX;
 import static christmas.config.ValidConfig.DATE_MIN;
 import static christmas.config.ValidConfig.ORDER_COUNT_MAX;
@@ -61,7 +62,7 @@ public class Validation {
 
     private static void validOrderCount(List<String> order) {
         int count = order.stream()
-                .map(menuAndCount -> menuAndCount.split("-"))
+                .map(menuAndCount -> menuAndCount.split(ORDER_MENU_COUNT_REGEX.getString()))
                 .filter(parts -> parts.length == 2)
                 .collect(Collectors.groupingBy(
                         parts -> parts[0],
@@ -93,7 +94,7 @@ public class Validation {
     }
 
     private static void parseOrders(String input) {
-        boolean validOrderExists = Arrays.stream(input.split(","))
+        boolean validOrderExists = Arrays.stream(input.split(ORDERS_REGEX.getString()))
                 .map(String::trim)
                 .anyMatch(Validation::stringValid);
 
@@ -103,23 +104,23 @@ public class Validation {
     }
 
     private static boolean stringValid(String order) {
-        if (order.matches("[a-zA-Z가-힣]+-\\d+")) {
-            int quantity = Integer.parseInt(order.split("-")[1]);
+        if (order.matches(ORDER_MENU_VALID_MATCHING_REGEX.getString())) {
+            int quantity = Integer.parseInt(order.split(ORDER_MENU_COUNT_REGEX.getString())[1]);
             return quantity >= 1;
         }
         return false;
     }
 
     private static void validateDrinkOrder(String input) {
-        int drinkCount = Math.toIntExact(Arrays.stream(input.split(","))
+        int drinkCount = Math.toIntExact(Arrays.stream(input.split(ORDERS_REGEX.getString()))
                 .map(String::trim)
-                .filter(order -> order.matches("[a-zA-Z가-힣]+-\\d+"))
-                .map(order -> order.split("-")[0])
+                .filter(order -> order.matches(ORDER_MENU_VALID_MATCHING_REGEX.getString()))
+                .map(order -> order.split(ORDER_MENU_COUNT_REGEX.getString())[0])
                 .map(Menu::getMenuFromName).filter(Objects::nonNull)
                 .filter(menu -> menu.getMenuDivision() == DRINK)
                 .count());
 
-        if (drinkCount == input.split(",").length) {
+        if (drinkCount == input.split(ORDERS_REGEX.getString()).length) {
             throwException(ALL_DRINK_ERROR.getMessage());
         }
     }

@@ -1,6 +1,7 @@
 package christmas.controller;
 
 import static christmas.config.CommonConfigNumber.GIFT_GIVEN_COUNT;
+import static christmas.config.CommonConfigNumber.ZERO;
 
 import christmas.model.AfterEventPrice;
 import christmas.model.Badge;
@@ -89,8 +90,8 @@ public class ChristmasController {
     }
 
     private void printBenefitSum(BenefitSum benefitSum) {
-        int sum = 0;
-        if (benefitSum.getBenefitSum() > 0) {
+        int sum = ZERO.getNumber();
+        if (benefitSum.getBenefitSum() > ZERO.getNumber()) {
             sum = -benefitSum.getBenefitSum();
         }
         outputView.printBenefitSum(sum);

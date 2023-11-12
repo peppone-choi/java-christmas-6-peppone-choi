@@ -1,6 +1,14 @@
 package christmas.view.Impl;
 
+import static christmas.config.CommonConfig.AFTER_EVENT_PRICE;
+import static christmas.config.CommonConfig.BEFORE_EVENT_PRICE;
+import static christmas.config.CommonConfig.BENEFIT_LIST;
+import static christmas.config.CommonConfig.BENEFIT_SUM;
+import static christmas.config.CommonConfig.EVENT_BADGE;
+import static christmas.config.CommonConfig.GIFT_MENU;
 import static christmas.config.CommonConfig.KOREAN_WON_FORMAT;
+import static christmas.config.CommonConfig.ORDERED_MENU;
+import static christmas.config.CommonConfig.PLUS_ENTER_FORMAT;
 import static christmas.config.CommonConfig.PRINT_DATE_FORMAT;
 
 import christmas.view.OutputView;
@@ -18,43 +26,43 @@ public class OutputViewImpl implements OutputView {
 
     @Override
     public void printMenu(String orders) {
-        System.out.println("<주문 메뉴>");
+        System.out.println(ORDERED_MENU.getString());
         System.out.println(orders);
     }
 
     @Override
     public void printBeforePrice(int price) {
-        System.out.println("<할인 전 총주문 금액>");
-        System.out.printf("%s\n%n", MessageFormat.format(KOREAN_WON_FORMAT.getString(), df.format(price)));
+        System.out.println(BEFORE_EVENT_PRICE.getString());
+        System.out.printf(PLUS_ENTER_FORMAT.getString(), MessageFormat.format(KOREAN_WON_FORMAT.getString(), df.format(price)));
     }
 
     @Override
     public void printGift(String gift) {
-        System.out.println("<증정 메뉴>");
-        System.out.printf("%s\n%n", gift);
+        System.out.println(GIFT_MENU.getString());
+        System.out.printf(PLUS_ENTER_FORMAT.getString(), gift);
     }
 
     @Override
     public void printBenefits(String benefits) {
-        System.out.println("<혜택 내역>");
+        System.out.println(BENEFIT_LIST.getString());
         System.out.println(benefits);
     }
 
     @Override
     public void printBenefitSum(int benefitSum) {
-        System.out.println("<총혜택 금액>");
-        System.out.printf("%s\n%n", MessageFormat.format(KOREAN_WON_FORMAT.getString(), df.format(benefitSum)));
+        System.out.println(BENEFIT_SUM.getString());
+        System.out.printf(PLUS_ENTER_FORMAT.getString(), MessageFormat.format(KOREAN_WON_FORMAT.getString(), df.format(benefitSum)));
     }
 
     @Override
     public void printAfterEventPrice(int afterEventPrice) {
-        System.out.println("<할인 후 예상 결제 금액>");
-        System.out.printf("%s\n%n", MessageFormat.format(KOREAN_WON_FORMAT.getString(), df.format(afterEventPrice)));
+        System.out.println(AFTER_EVENT_PRICE.getString());
+        System.out.printf(PLUS_ENTER_FORMAT.getString(), MessageFormat.format(KOREAN_WON_FORMAT.getString(), df.format(afterEventPrice)));
     }
 
     @Override
     public void printBadge(String badgeName) {
-        System.out.println("<12월 이벤트 배지>");
+        System.out.println(EVENT_BADGE.getString());
         System.out.println(badgeName);
     }
 }
