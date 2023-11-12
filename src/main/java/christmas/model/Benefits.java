@@ -40,7 +40,7 @@ public class Benefits {
     public String printBenefits() {
         int sum = benefits.stream().mapToInt(Benefit::getBenefitAmount).sum();
         if (sum <= 0) {
-            return "없음";
+            return "없음\n";
         }
         StringBuilder stringBuilder = new StringBuilder();
         benefits.forEach(benefit -> stringBuilder.append(benefit.printBenefit()));

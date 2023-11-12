@@ -1,6 +1,7 @@
 package christmas.view.Impl;
 
 import static christmas.config.CommonConfig.KOREAN_WON_FORMAT;
+import static christmas.config.CommonConfig.PRINT_DATE_FORMAT;
 
 import christmas.view.OutputView;
 import java.text.DecimalFormat;
@@ -11,8 +12,12 @@ public class OutputViewImpl implements OutputView {
     DecimalFormat df = new DecimalFormat("###,###");
 
     @Override
+    public void printDate(int date) {
+        System.out.printf(PRINT_DATE_FORMAT.getString(), date);
+    }
+
+    @Override
     public void printMenu(String orders) {
-        System.out.println("12월 26일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!\n");
         System.out.println("<주문 메뉴>");
         System.out.println(orders);
     }
@@ -38,7 +43,7 @@ public class OutputViewImpl implements OutputView {
     @Override
     public void printBenefitSum(int benefitSum) {
         System.out.println("<총혜택 금액>");
-        System.out.printf("-%s\n%n", MessageFormat.format(KOREAN_WON_FORMAT.getString(), df.format(benefitSum)));
+        System.out.printf("%s\n%n", MessageFormat.format(KOREAN_WON_FORMAT.getString(), df.format(benefitSum)));
     }
 
     @Override
