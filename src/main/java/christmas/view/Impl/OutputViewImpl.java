@@ -11,10 +11,15 @@ import static christmas.config.CommonConfig.KOREAN_WON_FORMAT;
 import static christmas.config.CommonConfig.ORDERED_MENU;
 import static christmas.config.CommonConfig.PLUS_ENTER_FORMAT;
 import static christmas.config.CommonConfig.PRINT_DATE_FORMAT;
+import static christmas.config.CommonConfig.PRINT_ORDER_FORMAT;
+import static christmas.config.OrderConfig.ORDER_PRINT_FORMAT;
 
+import christmas.model.Gift;
+import christmas.model.Orders;
 import christmas.view.OutputView;
 import java.text.DecimalFormat;
 import java.text.MessageFormat;
+import java.util.stream.Collectors;
 
 public class OutputViewImpl implements OutputView {
 
@@ -26,21 +31,24 @@ public class OutputViewImpl implements OutputView {
     }
 
     @Override
-    public void printMenu(String orders) {
+    public void printMenu(Orders orders) {
         System.out.println(ORDERED_MENU.getString());
-        System.out.println(orders);
+        System.out.println(orders.getOrders().getOrders().stream()
+                .map(order -> PRINT_ORDER_FORMAT.getString().formatted(order.printOrder()))
+                .collect(Collectors.joining()));
     }
 
     @Override
     public void printBeforePrice(int price) {
         System.out.println(BEFORE_EVENT_PRICE.getString());
-        System.out.printf(PLUS_ENTER_FORMAT.getString(), MessageFormat.format(KOREAN_WON_FORMAT.getString(), df.format(price)));
+        System.out.printf(PLUS_ENTER_FORMAT.getString(),
+                MessageFormat.format(KOREAN_WON_FORMAT.getString(), df.format(price)));
     }
 
     @Override
     public void printGift(String gift) {
         System.out.println(GIFT_MENU.getString());
-        System.out.printf(PLUS_ENTER_FORMAT.getString(), gift);
+        System.out.println(gift);
     }
 
     @Override
@@ -52,13 +60,15 @@ public class OutputViewImpl implements OutputView {
     @Override
     public void printBenefitSum(int benefitSum) {
         System.out.println(BENEFIT_SUM.getString());
-        System.out.printf(PLUS_ENTER_FORMAT.getString(), MessageFormat.format(KOREAN_WON_FORMAT.getString(), df.format(benefitSum)));
+        System.out.printf(PLUS_ENTER_FORMAT.getString(),
+                MessageFormat.format(KOREAN_WON_FORMAT.getString(), df.format(benefitSum)));
     }
 
     @Override
     public void printAfterEventPrice(int afterEventPrice) {
         System.out.println(AFTER_EVENT_PRICE.getString());
-        System.out.printf(PLUS_ENTER_FORMAT.getString(), MessageFormat.format(KOREAN_WON_FORMAT.getString(), df.format(afterEventPrice)));
+        System.out.printf(PLUS_ENTER_FORMAT.getString(),
+                MessageFormat.format(KOREAN_WON_FORMAT.getString(), df.format(afterEventPrice)));
     }
 
     @Override

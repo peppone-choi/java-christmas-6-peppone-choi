@@ -12,24 +12,23 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Orders {
-    private final List<Order> orders; // TODO : 일급 컬렉션
+    private final OrderList orders;
 
     public Orders(String orders) {
         Validation.validOrders(orders);
-        this.orders = makeList(orders);
+        this.orders = new OrderList(makeList(orders));
     }
 
-    public String printOrders() {
-        return orders.stream().map(order -> PRINT_ORDER_FORMAT.getString().formatted(order.printOrder()))
-                .collect(Collectors.joining());
-    } // TODO : 출력에 대한 과도한 책임이 지워짐. 책임을 제거할 필요 있음
-
     public List<OrderDto> toDtoList() {
-        return orders.stream().map(Order::toDto).collect(Collectors.toList());
+        return orders.getOrders().stream().map(Order::toDto).collect(Collectors.toList());
+    }
+
+    public OrderList getOrders() {
+        return orders;
     }
 
     public int calculateAll() {
-        return orders.stream().mapToInt(Order::calculateOrder).sum();
+        return orders.getOrders().stream().mapToInt(Order::calculateOrder).sum();
     }
 
     private List<Order> makeList(String orders) {

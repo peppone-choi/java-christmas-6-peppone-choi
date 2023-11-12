@@ -3,6 +3,7 @@ package christmas.model;
 import static christmas.config.CommonConfig.GIFT_NOT_GIVEN;
 import static christmas.config.CommonConfigNumber.GIFT_GIVEN_MONEY;
 import static christmas.config.OrderConfig.ORDER_PRINT_FORMAT;
+import static christmas.model.Menu.NONE;
 
 import java.text.MessageFormat;
 
@@ -15,7 +16,7 @@ public class Gift {
     }
 
     private void ValidMoney(int money, String name, int count) {
-        this.name = null;
+        this.name = NONE;
         this.count = new Count(0);
         if (money >= GIFT_GIVEN_MONEY.getNumber()) {
             this.name = Menu.getMenuFromName(name);
@@ -23,8 +24,11 @@ public class Gift {
         }
     }
 
-    public String printGift() {
-        if (name == null) return GIFT_NOT_GIVEN.getString();
-        return MessageFormat.format(ORDER_PRINT_FORMAT.getString(), name.getName(), count);
-    } // TODO : 출력에 대한 과도한 책임이 지워짐. 책임을 제거할 필요 있음
+    public Menu getName() {
+        return name;
+    }
+
+    public Count getCount() {
+        return count;
+    }
 }

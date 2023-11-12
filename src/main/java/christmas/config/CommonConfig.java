@@ -8,6 +8,7 @@ public enum CommonConfig {
     PRINT_ORDER_FORMAT("%s\n"),
     EXCEPTION_MESSAGE_FORMAT("%s %s"),
     DECIMAL_FORMAT_PATTON("###,###"),
+    GIFT_NOTHING("없음\n"),
     BENEFITS_NOTHING("없음\n"),
     KOREAN_WON_FORMAT("{0}원"),
     ERROR_SUFFIX("[ERROR]"),

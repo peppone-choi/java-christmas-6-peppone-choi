@@ -1,7 +1,10 @@
 package christmas.controller;
 
+import static christmas.config.CommonConfig.GIFT_NOTHING;
+import static christmas.config.CommonConfig.PRINT_ORDER_FORMAT;
 import static christmas.config.CommonConfigNumber.GIFT_GIVEN_COUNT;
 import static christmas.config.CommonConfigNumber.ZERO;
+import static christmas.config.OrderConfig.ORDER_PRINT_FORMAT;
 
 import christmas.model.AfterEventPrice;
 import christmas.model.Badge;
@@ -14,6 +17,7 @@ import christmas.model.Menu;
 import christmas.model.Orders;
 import christmas.view.InputView;
 import christmas.view.OutputView;
+import java.text.MessageFormat;
 
 public class ChristmasController {
     private final InputView inputView;
@@ -82,7 +86,14 @@ public class ChristmasController {
     }
 
     private void printGift(Gift gift) {
-        outputView.printGift(gift.printGift());
+        if (gift.getCount().getCount() <= 0) {
+            outputView.printGift(GIFT_NOTHING.getString());
+        }
+        if (gift.getCount().getCount() > 0) {
+            outputView.printGift(PRINT_ORDER_FORMAT.getString().formatted(
+                    MessageFormat.format(ORDER_PRINT_FORMAT.getString(), gift.getName().getName(),
+                            gift.getCount().getCount())));
+        }
     }
 
     private void printBeforeEventPrice(BeforeEventPrice beforeEventPrice) {
@@ -124,7 +135,7 @@ public class ChristmasController {
 
     private Orders getOrders() {
         Orders orders = readOrders(inputView.readOrder());
-        outputView.printMenu(orders.printOrders());
+        outputView.printMenu(orders);
         return orders;
     }
 

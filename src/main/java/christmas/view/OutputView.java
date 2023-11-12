@@ -1,8 +1,11 @@
 package christmas.view;
 
+import christmas.model.Gift;
+import christmas.model.Orders;
+
 public interface OutputView {
     void printDate(int date);
-    void printMenu(String orders);
+    void printMenu(Orders orders);
     void printBeforePrice(int price);
     void printGift(String gift);
     void printBenefits(String benefits);

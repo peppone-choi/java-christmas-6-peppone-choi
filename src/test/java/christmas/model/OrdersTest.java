@@ -42,18 +42,6 @@ class OrdersTest {
     }
 
     @Test
-    void printOrders() {
-        // given
-        Orders orderList = new Orders("티본스테이크-1,바비큐립-1");
-
-        // when
-        String printOrder = orderList.printOrders();
-
-        // then
-        assertThat(printOrder).contains("티본스테이크", "바비큐립", "1");
-    }
-
-    @Test
     void toDtoList() {
         // given
         Orders orderList = new Orders("티본스테이크-1,바비큐립-1");

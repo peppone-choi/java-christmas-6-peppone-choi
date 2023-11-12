@@ -20,7 +20,7 @@ public class Order {
 
     public String printOrder() {
         return MessageFormat.format(ORDER_PRINT_FORMAT.getString(), orderedMenu.getName(), orderedCount.getCount());
-    }    // TODO : 출력에 대한 과도한 책임이 지워짐. 책임을 제거할 필요 있음
+    }
 
     public int calculateOrder() {
         return orderedMenu.getCost() * orderedCount.getCount();
