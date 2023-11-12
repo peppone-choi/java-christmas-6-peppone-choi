@@ -102,7 +102,7 @@ public class ChristmasController {
     }
 
     private void printBenefits(Benefits benefits) {
-        outputView.printBenefits(benefits.printBenefits());
+        outputView.printBenefits(benefits.getBenefits().printBenefits());
     }
 
     private Badge getBadge(int benefitSum) {

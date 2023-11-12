@@ -3,7 +3,7 @@ package christmas.model;
 import christmas.util.Validation;
 
 public class ExpectedVisitDate {
-    private final int date;
+    private final int date; // TODO : 원시값 포장
 
     public ExpectedVisitDate(int date) {
         Validation.validDate(String.valueOf(date));

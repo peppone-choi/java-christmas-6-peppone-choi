@@ -8,7 +8,7 @@ import java.text.MessageFormat;
 
 public class Gift {
     private Menu name;
-    private int count;
+    private int count; // TODO : 원시값 포장
 
     public Gift(int money, String name, int count) {
         ValidMoney(money, name, count);
@@ -26,5 +26,5 @@ public class Gift {
     public String printGift() {
         if (name == null) return GIFT_NOT_GIVEN.getString();
         return MessageFormat.format(ORDER_PRINT_FORMAT.getString(), name.getName(), count);
-    }
+    } // TODO : 출력에 대한 과도한 책임이 지워짐. 책임을 제거할 필요 있음
 }

@@ -28,7 +28,7 @@ class BenefitsTest {
     @Test
     void printBenefits() {
         // when
-        String s = benefits.printBenefits();
+        String s = benefits.getBenefits().printBenefits();
 
         // then
         assertThat(s).isEqualTo("평일 할인: -4,046원 \n"
@@ -40,7 +40,7 @@ class BenefitsTest {
     @Test
     void sumBenefits() {
         // when
-        int sum = benefits.sumBenefits();
+        int sum = benefits.getBenefits().sumBenefits();
 
         // then
         assertThat(sum).isEqualTo(31246);
@@ -49,7 +49,7 @@ class BenefitsTest {
     @Test
     void sumDiscount() {
         // when
-        int sum = benefits.sumDiscount();
+        int sum = benefits.getBenefits().sumDiscount();
 
         // then
         assertThat(sum).isEqualTo(6246);

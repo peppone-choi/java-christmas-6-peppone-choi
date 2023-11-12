@@ -8,7 +8,7 @@ import java.text.MessageFormat;
 
 public class Benefit {
     private final DiscountAndGift discountAndGift;
-    private final int benefitAmount;
+    private final int benefitAmount; // TODO : 원시값 포장
 
     public Benefit(DiscountAndGift discountAndGift, int benefitAmount) {
         this.discountAndGift = discountAndGift;
@@ -23,7 +23,7 @@ public class Benefit {
         return benefitAmount;
     }
 
-    public String printBenefit() {
+    public String printBenefit() { // TODO : 출력에 대한 과도한 책임이 지워짐. 책임을 제거할 필요 있음
         if (benefitAmount <= ZERO.getNumber()) {
             return NONE.getString();
         }

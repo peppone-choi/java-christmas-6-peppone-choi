@@ -26,10 +26,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Benefits {
-    private final List<Benefit> benefits;
+    private final BenefitList benefits;
 
     public Benefits(List<OrderDto> orderDtoList, ExpectedVisitDate expectedVisitDate) {
-        this.benefits = makeBenefitList(orderDtoList, expectedVisitDate);
+        this.benefits = new BenefitList(makeBenefitList(orderDtoList, expectedVisitDate));
     }
 
     private static void addList(List<Benefit> benefits, int weekdayDiscount, int weekendDiscount, int specialDiscount,
@@ -41,28 +41,7 @@ public class Benefits {
         benefits.add(new Benefit(GIFT_EVENT, giftEvent));
     }
 
-    public String printBenefits() {
-        int sum = benefits.stream().mapToInt(Benefit::getBenefitAmount).sum();
-        if (sum <= ZERO.getNumber()) {
-            return BENEFITS_NOTHING.getString();
-        }
-        StringBuilder stringBuilder = new StringBuilder();
-        benefits.forEach(benefit -> stringBuilder.append(benefit.printBenefit()));
-        return stringBuilder.toString();
-    }
 
-    public int sumBenefits() {
-        return benefits.stream()
-                .mapToInt(Benefit::getBenefitAmount)
-                .sum();
-    }
-
-    public int sumDiscount() {
-        return benefits.stream()
-                .filter(benefit -> !benefit.getDiscountAndGift().equals(GIFT_EVENT))
-                .mapToInt(Benefit::getBenefitAmount)
-                .sum();
-    }
 
     private List<Benefit> makeBenefitList(List<OrderDto> orderDtoList, ExpectedVisitDate expectedVisitDate) {
         List<Benefit> benefits = new ArrayList<>();
@@ -128,5 +107,9 @@ public class Benefits {
                 .filter(orderDto -> orderDto.orderedMenu().getMenuDivision().equals(menuDivision))
                 .mapToInt(orderDto -> orderDto.orderedCount() * EVENT_DISCOUNT_COST.getNumber())
                 .sum();
+    }
+
+    public BenefitList getBenefits() {
+        return benefits;
     }
 }
