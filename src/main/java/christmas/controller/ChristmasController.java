@@ -27,7 +27,7 @@ public class ChristmasController {
     public void run() {
         ExpectedVisitDate date = getExpectedVisitDate();
         Orders orders = getOrders();
-        outputView.printDate(date.getDate());
+        outputView.printDate(date.getDate().getDate());
         BeforeEventPrice beforeEventPrice = getBeforeEventPrice(orders);
         printGift(beforeEventPrice);
         Benefits benefits = getBenefits(orders, date);
@@ -77,7 +77,7 @@ public class ChristmasController {
     }
 
     private void printBadge(BenefitSum benefitSum) {
-        Badge badge = getBadge(benefitSum.getBenefitSum());
+        Badge badge = getBadge(benefitSum.getBenefitSum().getSum());
         printBadge(badge);
     }
 
@@ -91,8 +91,8 @@ public class ChristmasController {
 
     private void printBenefitSum(BenefitSum benefitSum) {
         int sum = ZERO.getNumber();
-        if (benefitSum.getBenefitSum() > ZERO.getNumber()) {
-            sum = -benefitSum.getBenefitSum();
+        if (benefitSum.getBenefitSum().getSum() > ZERO.getNumber()) {
+            sum = -benefitSum.getBenefitSum().getSum();
         }
         outputView.printBenefitSum(sum);
     }

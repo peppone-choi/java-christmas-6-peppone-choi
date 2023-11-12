@@ -10,7 +10,7 @@ class ExpectedVisitDateTest {
 
     @Test
     void getDate() {
-        assertSimpleTest(() -> assertThat(new ExpectedVisitDate(25).getDate()).isEqualTo(25));
+        assertSimpleTest(() -> assertThat(new ExpectedVisitDate(25).getDate().getDate()).isEqualTo(25));
     }
 
     @Test

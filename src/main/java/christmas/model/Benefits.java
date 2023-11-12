@@ -44,10 +44,10 @@ public class Benefits {
     private List<Benefit> makeBenefitList(List<OrderDto> orderDtoList, ExpectedVisitDate expectedVisitDate) {
         List<Benefit> benefits = new ArrayList<>();
 
-        int weekdayDiscount = calculateWeekdayDiscount(orderDtoList, expectedVisitDate.getDate());
-        int weekendDiscount = calculateWeekendDiscount(orderDtoList, expectedVisitDate.getDate());
-        int specialDiscount = calculateSpecialDiscount(expectedVisitDate.getDate());
-        int christmasDDayDiscount = calculateChristmasDDayDiscount(expectedVisitDate.getDate());
+        int weekdayDiscount = calculateWeekdayDiscount(orderDtoList, expectedVisitDate.getDate().getDate());
+        int weekendDiscount = calculateWeekendDiscount(orderDtoList, expectedVisitDate.getDate().getDate());
+        int specialDiscount = calculateSpecialDiscount(expectedVisitDate.getDate().getDate());
+        int christmasDDayDiscount = calculateChristmasDDayDiscount(expectedVisitDate.getDate().getDate());
         int giftEvent = calculateGiftEvent(orderDtoList);
 
         addList(benefits, weekdayDiscount, weekendDiscount, specialDiscount, christmasDDayDiscount, giftEvent);

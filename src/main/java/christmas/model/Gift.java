@@ -8,7 +8,7 @@ import java.text.MessageFormat;
 
 public class Gift {
     private Menu name;
-    private int count; // TODO : 원시값 포장
+    private Count count;
 
     public Gift(int money, String name, int count) {
         ValidMoney(money, name, count);
@@ -16,10 +16,10 @@ public class Gift {
 
     private void ValidMoney(int money, String name, int count) {
         this.name = null;
-        this.count = 0;
+        this.count = new Count(0);
         if (money >= GIFT_GIVEN_MONEY.getNumber()) {
             this.name = Menu.getMenuFromName(name);
-            this.count = count;
+            this.count = new Count(count);
         }
     }
 

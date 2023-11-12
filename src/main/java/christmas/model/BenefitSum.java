@@ -1,13 +1,13 @@
 package christmas.model;
 
 public class BenefitSum {
-    private final int benefitSum; // TODO : 원시값 포장
+    private final Sum benefitSum;
 
     public BenefitSum(Benefits benefits) {
-        this.benefitSum = benefits.getBenefits().sumBenefits();
+        this.benefitSum = new Sum(benefits.getBenefits().sumBenefits());
     }
 
-    public int getBenefitSum() {
+    public Sum getBenefitSum() {
         return benefitSum;
     }
 }
