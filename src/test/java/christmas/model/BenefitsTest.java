@@ -31,10 +31,12 @@ class BenefitsTest {
         String s = benefits.getBenefits().printBenefits();
 
         // then
-        assertThat(s).isEqualTo("평일 할인: -4,046원 \n"
-                + "특별 할인: -1,000원 \n"
-                + "크리스마스 디데이 할인: -1,200원 \n"
-                + "증정 이벤트: -25,000원 \n");
+        assertThat(s).isEqualTo("""
+                평일 할인: -4,046원\s
+                특별 할인: -1,000원\s
+                크리스마스 디데이 할인: -1,200원\s
+                증정 이벤트: -25,000원\s
+                """);
     }
 
     @Test
