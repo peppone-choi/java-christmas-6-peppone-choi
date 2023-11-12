@@ -1,11 +1,7 @@
 package christmas.model;
 
-import static christmas.config.CommonConfig.GIFT_NOT_GIVEN;
 import static christmas.config.CommonConfigNumber.GIFT_GIVEN_MONEY;
-import static christmas.config.OrderConfig.ORDER_PRINT_FORMAT;
 import static christmas.model.Menu.NONE;
-
-import java.text.MessageFormat;
 
 public class Gift {
     private Menu name;

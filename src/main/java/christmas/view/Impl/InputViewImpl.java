@@ -1,8 +1,8 @@
 package christmas.view.Impl;
 
 import static camp.nextstep.edu.missionutils.Console.readLine;
-import static christmas.config.CommonConfig.PLEASE_INPUT_ORDER;
 import static christmas.config.CommonConfig.PLEASE_INPUT_DATE;
+import static christmas.config.CommonConfig.PLEASE_INPUT_ORDER;
 
 import christmas.util.Validation;
 import christmas.view.InputView;

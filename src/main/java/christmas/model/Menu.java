@@ -1,13 +1,11 @@
 package christmas.model;
 
 import static christmas.config.CommonConfig.MENU_NOT_FOUND_ERROR;
-import static christmas.exception.IllegalArgumentExceptionThrower.*;
-import static christmas.model.MenuDivision.*;
+import static christmas.exception.IllegalArgumentExceptionThrower.throwException;
 import static christmas.model.MenuDivision.APPETIZER;
 import static christmas.model.MenuDivision.DESSERT;
 import static christmas.model.MenuDivision.DRINK;
 import static christmas.model.MenuDivision.MAIN;
-import static christmas.model.MenuDivision.NONE;
 
 public enum Menu {
     MUSHROOM_SOUP("양송이수프", 6000, APPETIZER),
@@ -34,18 +32,6 @@ public enum Menu {
         this.menuDivision = menuDivision;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public int getCost() {
-        return cost;
-    }
-
-    public MenuDivision getMenuDivision() {
-        return menuDivision;
-    }
-
     public static Menu getMenuFromName(String name) {
         for (Menu menu : values()) {
             if (menu.getName().equalsIgnoreCase(name)) {
@@ -67,5 +53,17 @@ public enum Menu {
             }
         }
         return false;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getCost() {
+        return cost;
+    }
+
+    public MenuDivision getMenuDivision() {
+        return menuDivision;
     }
 }

@@ -12,9 +12,7 @@ import static christmas.config.CommonConfig.ORDERED_MENU;
 import static christmas.config.CommonConfig.PLUS_ENTER_FORMAT;
 import static christmas.config.CommonConfig.PRINT_DATE_FORMAT;
 import static christmas.config.CommonConfig.PRINT_ORDER_FORMAT;
-import static christmas.config.OrderConfig.ORDER_PRINT_FORMAT;
 
-import christmas.model.Gift;
 import christmas.model.Orders;
 import christmas.view.OutputView;
 import java.text.DecimalFormat;
